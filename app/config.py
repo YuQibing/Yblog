@@ -42,12 +42,22 @@ class SqlConfig(Config):
 # 配置mysql数据库
 
 class MysqlDevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@localhost/db'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@127.0.0.1:3306/db?charset=ut8'
 
 
 class MysqlTestConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@localhost/db'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@127.0.0.1:3306/db?charset=ut8'
 
 
 class MysqlConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@localhost/db'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:123456@127.0.0.1:3306/db?charset=ut8'
+
+config = {
+    'sqldevconfig': SqlDevelopmentConfig,
+    'sqltesconfig': SqlTestConfig,
+    'sqlconfig': SqlConfig,
+    'mysqldevconfig': MysqlDevelopmentConfig,
+    'mysqltestconfig': MysqlTestConfig,
+    'mysqlconfig': MysqlConfig,
+    'default': SqlDevelopmentConfig
+}
