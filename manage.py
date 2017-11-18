@@ -11,7 +11,6 @@ app = create_app(config_name)
 
 # 用manager来管理app
 manager = Manager(app)
-
 # 添加终端管理
 manager.add_command('db', MigrateCommand)
 
