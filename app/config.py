@@ -14,12 +14,12 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # 设置邮件
     MAIL_SERVER = os.environ.get('MAIL_SERVER') or 'smtp:163.com'
-    AIL_USERNAME = os.environ.get('MAIL_USERNAME') or '18395960686@163.com'
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or '18395960686@163.com'
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or 'zhangchi1204'
     # 设置图片大小
     MAX_CONTENT_LENGTH = 2 * 1024 * 1024
     # 设置图片路径
-    UPLOADS_DEFAULT_DEST = os.path.join(BASE_DIR, 'static/upload')
+    UPLOADED_PHOTOS_DEST = os.path.join(BASE_DIR, 'static/upload')
 
     @staticmethod
     def init_app(app):
