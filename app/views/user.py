@@ -1,7 +1,7 @@
 from flask import Blueprint
 from app.models import User
 from flask import render_template
-from app.forms import Register
+from app.forms import Register, Login
 
 # 创建一个蓝本
 user = Blueprint('user', __name__)
@@ -9,7 +9,8 @@ user = Blueprint('user', __name__)
 
 @user.route('/login')
 def login():
-    return render_template('main/index.html')
+    form = Login()
+    return render_template('user/login.html', form=form)
 
 
 @user.route('/register')

@@ -26,3 +26,22 @@ class Register(FlaskForm):
         email = User.query.filter_by(email=field.email)
         if email.first():
             raise ValidationError('该邮箱已被注册')
+
+
+# 定义一个登录类
+class Login(FlaskForm):
+    username = StringField('用户名', validators=[DataRequired()])
+    password = PasswordField('密码', validators=[DataRequired()])
+    remember = BooleanField('记住我', validators=[DataRequired()])
+    submit = SubmitField('登录')
+
+    # 验证
+    def validata_username(self, field):
+        user = User.query.filter_by(username=field.username)
+        if user.first():
+            if user.first().password:
+                return True
+            else:
+                raise ValidationError('密码错误')
+        else:
+            raise ValidationError('用户名不存在')
