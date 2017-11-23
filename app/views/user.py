@@ -1,9 +1,11 @@
 from PIL import Image
 from flask import Blueprint
+from flask import make_response
 from flask import redirect
-from flask import request
+from flask import session
+import base64
+from app import checkcode
 from flask import url_for
-
 from app.email import send_mail
 import os
 import random
@@ -30,6 +32,12 @@ def login():
 def register():
     form = Register()
     if form.validate_on_submit():
+        verify_code = form.verify_code.data
+        print(verify_code)
+        if 'verify_code' in session and session['verifyCode'] != verify_code:
+            flash('验证码错误')
+        else:
+            flash('验证码正确')
         username = User.query.filter_by(username=form.username.data).first()
         email = User.query.filter_by(email=form.email.data).first()
         if username:
@@ -61,6 +69,15 @@ def register():
         flash('激活邮件已发送，请激活')
         return redirect(url_for('main.index'))
     return render_template('user/register.html', form=form)
+
+
+@user.route('/Verify/')
+def verifyCode():
+    img, text = checkcode.generate_verification_code()
+    session['verifyCode'] = text
+    response = make_response(img)
+    response.headers['Content-Type'] = 'image/jpeg'
+    return response
 
 
 @user.route('/activate/<token>')
