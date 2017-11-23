@@ -4,30 +4,31 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login/login.css') }}">
 {% endblock %}
 {% block page_content %}
-        {{ wtf.quick_form(form) }}
-{#    <form method="post" class="form">#}
-{#        {{ form.hidden_tag() }}#}
-{#        <div class="form-group required">#}
-{#            {{ form.username.label(class="control-label") }}#}
-{#            {{ form.username(class="form-control form_style") }}#}
-{#        </div>#}
-{#        <div class="form-group required">#}
-{#            {{ form.password.label(class="control-label") }}#}
-{#            {{ form.password(class="form-control form_style") }}#}
-{#        </div>#}
-{#        <div class="form-group required">#}
-{#            {{ form.password_confirm.label(class="control-label") }}#}
-{#            {{ form.password_confirm(class="form-control form_style") }}#}
-{#        </div>#}
-{#        <div class="form-group required">#}
-{#            {{ form.email.label(class="control-label") }}#}
-{#            {{ form.email(class="form-control form_style") }}#}
-{#        </div>#}
-{#        <div class="form-group required">#}
-{#            {{ form.icon.label() }}#}
-{#            {{ form.icon() }}#}
-{#        </div>#}
-{#        {{ form.submit(class="btn btn-info submit") }}#}
-{#    </form>#}
+{#        {{ wtf.quick_form(form) }}#}
+    <form method="post" class="form" enctype="multipart/form-data" >
+
+        {{ form.hidden_tag() }}
+        <div class="form-group required">
+            {{ form.username.label(class="control-label") }}
+            {{ form.username(class="form-control form_style") }}
+        </div>
+        <div class="form-group required">
+            {{ form.password.label(class="control-label") }}
+            {{ form.password(class="form-control form_style") }}
+        </div>
+        <div class="form-group required">
+            {{ form.password_confirm.label(class="control-label") }}
+            {{ form.password_confirm(class="form-control form_style") }}
+        </div>
+        <div class="form-group required">
+            {{ form.email.label(class="control-label") }}
+            {{ form.email(class="form-control form_style") }}
+        </div>
+        <div class="form-group required">
+            {{ form.icon.label() }}
+            {{ form.icon() }}
+        </div>
+        {{ form.submit(class="btn btn-info submit") }}
+    </form>
 
 {% endblock %}

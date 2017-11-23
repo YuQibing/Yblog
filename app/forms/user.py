@@ -12,7 +12,7 @@ class Register(FlaskForm):
     password = PasswordField('密码', validators=[DataRequired(), Length(6, 10, message='密码必须是6到10位字符')])
     password_confirm = PasswordField('确认密码', validators=[EqualTo('password', message='两次输入密码不同')])
     email = StringField('邮箱', validators=[Email(message='请输入正确到邮箱地址')])
-    icon = FileField('头像', validators=[FileRequired('请选择上传的头像'), FileAllowed(photos, message='只能上传图片')])
+    icon = FileField('头像', validators=[FileRequired(message='请选择上传的头像'), FileAllowed(photos, message='只能上传图片')])
     submit = SubmitField('立即注册')
 
     # 自定义表单验证
