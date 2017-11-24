@@ -33,13 +33,13 @@ def register():
     form = Register()
     if form.validate_on_submit():
         verify_code = form.verify_code.data
+        username = User.query.filter_by(username=form.username.data).first()
+        email = User.query.filter_by(email=form.email.data).first()
         print(verify_code)
         if 'verify_code' in session and session['verifyCode'] != verify_code:
             flash('验证码错误')
         else:
             flash('验证码正确')
-        username = User.query.filter_by(username=form.username.data).first()
-        email = User.query.filter_by(email=form.email.data).first()
         if username:
             flash('该账户已经注册')
         if email:

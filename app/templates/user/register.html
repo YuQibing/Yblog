@@ -2,6 +2,7 @@
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login/login.css') }}">
+    <script src="{{ url_for('static', filename='js/user/register.js') }}"></script>
 {% endblock %}
 {% block page_content %}
 {#        {{ wtf.quick_form(form) }}#}
@@ -26,7 +27,8 @@
         </div>
         <div class="form-group required">
             {{ form.verify_code.label(class="control-label") }}
-             <label class="control-label"><img src="{{ url_for('user.verifyCode')}}"></label>
+             <label class="control-label"><img id='verifyCode' src="{{ url_for('user.verifyCode')}}"></label>
+            <fresh id='freshCode'>看不清？点击刷新</fresh>
             {{ form.verify_code(class="form-control form_style") }}
         </div>
         <div class="form-group required">
