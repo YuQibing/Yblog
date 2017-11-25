@@ -33,6 +33,7 @@ class Register(FlaskForm):
 class Login(FlaskForm):
     username = StringField('用户名', validators=[DataRequired()])
     password = PasswordField('密码', validators=[DataRequired()])
+    verifyCode = StringField('验证码', validators=[DataRequired(), Length(4, 4, message='输入4位验证码')])
     remember = BooleanField('记住我', validators=[DataRequired()])
     submit = SubmitField('登录')
 

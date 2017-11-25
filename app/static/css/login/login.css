@@ -2,6 +2,12 @@
     width: 400px;
     height: 40px;
 }
+#freshCode{
+    color: blue;
+    text-decoration: underline;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
 #freshCode:hover{
     cursor: pointer;
 }
