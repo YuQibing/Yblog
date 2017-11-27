@@ -47,3 +47,11 @@ class Login(FlaskForm):
                 raise ValidationError('密码错误')
         else:
             raise ValidationError('用户名不存在')
+
+
+# 定义一个修改密码的类
+class ChangePassword(FlaskForm):
+    password = PasswordField('原密码', validators=[DataRequired(), Length(6, 10, message='输入6到10位的密码')])
+    newPassword = PasswordField('新密码', validators=[DataRequired(), Length(6, 10, message='输入6到10位的密码')])
+    confirmPassword = PasswordField('确认密码', validators=[EqualTo('newPassword', message='两次密码输入不一样')])
+    submit = SubmitField('修改')

@@ -25,8 +25,8 @@
                                     src="{{ url_for('static', filename='upload/' + current_user.icon) }}"
                                     alt="">{{ current_user.username }}<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">用户信息</a></li>
-                                <li><a href="#">修改密码</a></li>
+                                <li><a href="{{ url_for('user.profiles') }}">用户信息</a></li>
+                                <li><a href="{{ url_for('user.changepassword') }}">修改密码</a></li>
                                 <li><a href="#">修改头像</a></li>
                                 <li><a href="#">我收藏的</a></li>
                             </ul>
@@ -48,7 +48,7 @@
         {#展示flash 消息#}
         {% for m in get_flashed_messages() %}
             <div class="alert alert-warning">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 {{ m }}
             </div>
         {% endfor %}

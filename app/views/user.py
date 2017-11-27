@@ -6,22 +6,23 @@ from flask import make_response
 from flask import redirect
 from flask import request
 from flask import session
+from flask_login import login_required
 from flask_login import logout_user
 
 from flask_login import current_user
 from flask_login import login_user
-
+import os
 from app import checkcode
 from flask import url_for
 from app.email import send_mail
-import os
+from flask import abort
 import random
 from flask import current_app
 from flask import flash
 from app.extensions import photos, db
 from app.models import User
 from flask import render_template
-from app.forms import Register, Login
+from app.forms import Register, Login, ChangePassword
 
 # 创建一个蓝本
 user = Blueprint('user', __name__)
@@ -51,16 +52,23 @@ def login():
                 flash('无效密码')
         else:
             flash('无效用户名')
-            current_user.is_authenticated
     return render_template('user/login.html', form=form)
 
 
-@user.route('logout')
+@user.route('/logout')
+# 判断用户是否登录 如果未登录 则会提示
+@login_required
 def logout():
     # 安全退出当前用户
     logout_user()
     flash('安全退出当前用户')
     return render_template('main/index.html')
+
+
+@user.route('/profiles')
+@login_required
+def profiles():
+    return render_template('user/profile.html')
 
 
 @user.route('/register', methods=['GET', 'POST'])
@@ -123,6 +131,23 @@ def activate(token):
     else:
         flash('激活失败')
         return redirect(url_for('main.index'))
+
+
+@user.route('/changepassword', methods=['POST', 'GET'])
+@login_required
+def changepassword():
+    form = ChangePassword()
+    u = User.query.filter_by(username=current_user.username).first()
+    password = form.password.data
+    if form.validate_on_submit():
+        if u.verify_password(password):
+            flash('密码修改成功')
+            u.password = form.newPassword.data
+            db.session.commit()
+            return redirect(url_for('user.changepassword'))
+        else:
+            flash('原密码错误')
+    return render_template('user/changepassword.html', form=form)
 
 
 # 生成随机的字符串 用来作为 图片的名字

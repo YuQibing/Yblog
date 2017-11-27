@@ -31,6 +31,7 @@ def config_extensions(app):
     # 指定上传文件的大小
     # 如果设置是None值 则会从app.config中get('MAX_CONTENT_LENGTH')
     patch_request_class(app, size=None)
+    # 当访问一些必须登录之后才能访问当路由会提示
     login_manager.login_message = '登录后才能访问'
     # 指定登录的视图函数
     login_manager.login_view = 'user.login'
