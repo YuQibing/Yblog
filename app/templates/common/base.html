@@ -1,10 +1,5 @@
 {% extends 'bootstrap/base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
-{% block styles %}
-    {{ super() }}
-    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-{% endblock %}
 {% block navbar %}
     <nav class="navbar navbar-inverse" style="border-radius: 0px;">
         <div class="container">
@@ -19,34 +14,31 @@
                 </button>
                 <a class="navbar-brand" href="{{ url_for('main.index') }}">博客地带</a>
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse">
-
                 <ul class="nav navbar-nav navbar-right">
-{#                    {% if current_user.is_authenticated %}#}
-{#                        <li><a href="#">退出</a></li>#}
-{#                        <li class="dropdown">#}
-{#                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"#}
-{#                               aria-haspopup="true" aria-expanded="false"><img style="width: 20px;height: 20px"#}
-{#                                    src="{{ url_for('static', filename='upload/' + current_user.icon) }}"#}
-{#                                    alt="">{{ current_user.username }}<span#}
-{#                                    class="caret"></span></a>#}
-{#                            <ul class="dropdown-menu">#}
-{#                                <li><a href="#">用户信息</a></li>#}
-{#                                <li><a href="#">修改密码</a></li>#}
-{#                                <li><a href="#">修改头像</a></li>#}
-{#                                <li><a href="#">我收藏的</a></li>#}
-{#                            </ul>#}
-{#                        </li>#}
-{#                    {% else %}#}
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{ url_for('user.logout') }}">退出</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false"><img style="width: 20px;height: 20px"
+                                    src="{{ url_for('static', filename='upload/' + current_user.icon) }}"
+                                    alt="">{{ current_user.username }}<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">用户信息</a></li>
+                                <li><a href="#">修改密码</a></li>
+                                <li><a href="#">修改头像</a></li>
+                                <li><a href="#">我收藏的</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
                         <li><a href="{{ url_for('user.login') }}">登录</a></li>
                         <li><a href="{{ url_for('user.register') }}">注册</a></li>
-{#                    {% endif %}#}
+                    {% endif %}
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
-    </nav>
+        </nav>
 
 {% endblock %}
 
@@ -68,7 +60,12 @@
 {% endblock %}
 
 # 手动添加js 提高加载速度
-{#{% block scripts %}#}
-{#    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>#}
-{#    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>#}
-{#{% endblock %}#}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    {#    {{ super() }}#}
+    {#    导入moment.js#}
+    {{ moment.include_moment() }}
+    {{ moment.locale('zh-CN') }}
+
+{% endblock %}

@@ -1,10 +1,12 @@
+import re
+
 from PIL import Image
 from flask import Blueprint
 from flask import make_response
 from flask import redirect
 from flask import request
 from flask import session
-import base64
+from flask_login import logout_user
 
 from flask_login import current_user
 from flask_login import login_user
@@ -35,19 +37,30 @@ def login():
     if form.validate_on_submit():
         if u:
             if u.verify_password(form.password.data):
-                print(session['verifyCode'])
-                if session['verifyCode'] != verify_code and 'verify_code' in session:
-                    flash('验证码错误')
-                else:
+                # print(session['verifyCode'])
+                # print(verify_code)
+                # 利用正则 re.I 来忽略输入的验证码的大小写
+                if re.compile(verify_code, re.I).findall(session['verifyCode']):
                     #  用户登录
                     login_user(u, remember=form.username.data)
+                    flash('欢迎%s登录' % form.username.data)
                     return redirect(request.args.get('next') or url_for('main.index'))
+                else:
+                    flash('验证码错误')
             else:
                 flash('无效密码')
         else:
             flash('无效用户名')
             current_user.is_authenticated
     return render_template('user/login.html', form=form)
+
+
+@user.route('logout')
+def logout():
+    # 安全退出当前用户
+    logout_user()
+    flash('安全退出当前用户')
+    return render_template('main/index.html')
 
 
 @user.route('/register', methods=['GET', 'POST'])
@@ -62,9 +75,7 @@ def register():
             flash('该账户已经注册')
         if email:
             flash('该邮箱已经绑定，请换一个')
-        if 'verify_code' in session and session['verifyCode'] != verify_code:
-            flash('验证码错误')
-        else:
+        if re.compile(verify_code, re.I).findall(session['verifyCode']):
             flash('验证码正确')
             # 获取上传文件的后缀
             suffix = os.path.splitext(form.icon.data.filename)[1]
@@ -90,6 +101,8 @@ def register():
             send_mail(form.email.data, '账户激活', 'email/activate', token=token, username=form.username.data)
             flash('激活邮件已发送，请激活')
             return redirect(url_for('main.index'))
+        else:
+            flash('验证码错误')
     return render_template('user/register.html', form=form)
 
 

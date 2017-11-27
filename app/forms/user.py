@@ -34,7 +34,7 @@ class Login(FlaskForm):
     username = StringField('用户名', validators=[DataRequired()])
     password = PasswordField('密码', validators=[DataRequired()])
     verifyCode = StringField('验证码', validators=[DataRequired(), Length(4, 4, message='输入4位验证码')])
-    remember = BooleanField('记住我', validators=[DataRequired()])
+    remember = BooleanField('记住我', default=False)
     submit = SubmitField('登录')
 
     # 验证
