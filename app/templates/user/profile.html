@@ -1,0 +1,32 @@
+{% extends 'common/base.html' %}
+
+{% block title %}用户信息{% endblock %}
+{% block page_content %}
+    <form class="form-inline">
+        <div class="form-group">
+            <div>
+                <p>头像</p>
+                <img src="{{ url_for('static', filename='upload/'+current_user.icon) }}"
+                     style="width: 64px ;height: 64px">
+            </div>
+            <br>
+            <div>
+                <label for="username">用户名</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" id="username" value="{{ current_user.username }}" readonly>
+            </div>
+        </div>
+        <br>
+        <div class="form-group">
+            <div>
+                <label for="username">邮箱</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" id="username" value="{{ current_user.email }}" readonly>
+            </div>
+        </div>
+        <br>
+    </form>
+{% endblock %}
+

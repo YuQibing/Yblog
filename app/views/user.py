@@ -74,6 +74,8 @@ def profiles():
 @user.route('/register', methods=['GET', 'POST'])
 def register():
     form = Register()
+    if not form.validate_on_submit():
+        print(form.errors)
     if form.validate_on_submit():
         verify_code = form.verify_code.data
         username = User.query.filter_by(username=form.username.data).first()

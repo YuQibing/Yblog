@@ -6,29 +6,37 @@
 {% endblock %}
 {% block title %}注册{% endblock %}
 {% block page_content %}
-{#        {{ wtf.quick_form(form) }}#}
-    <form method="post" class="form" enctype="multipart/form-data" >
+    {#        {{ wtf.quick_form(form) }}#}
+    <form method="post" class="form" enctype="multipart/form-data">
 
         {{ form.hidden_tag() }}
         <div class="form-group required">
             {{ form.username.label(class="control-label") }}
             {{ form.username(class="form-control form_style") }}
         </div>
+        {% if form.username.errors %}{% for error in form.username.errors %}<span class="help-block">{{ error }}</span>
+        {% endfor %}{% endif %}
         <div class="form-group required">
             {{ form.password.label(class="control-label") }}
             {{ form.password(class="form-control form_style") }}
         </div>
+        {% if form.password.errors %}{% for error in form.password.errors %}<span class="help-block">{{ error }}</span>
+        {% endfor %}{% endif %}
         <div class="form-group required">
             {{ form.password_confirm.label(class="control-label") }}
             {{ form.password_confirm(class="form-control form_style") }}
         </div>
+        {% if form.password_confirm.errors %}{% for error in form.password_confirm.errors %}<span class="help-block">{{ error }}</span>
+        {% endfor %}{% endif %}
         <div class="form-group required">
             {{ form.email.label(class="control-label") }}
             {{ form.email(class="form-control form_style") }}
         </div>
+        {% if form.email.errors %}{% for error in form.email.errors %}<span class="help-block">{{ error }}</span>
+        {% endfor %}{% endif %}
         <div class="form-group required">
             {{ form.verify_code.label(class="control-label") }}
-             <label class="control-label"><img id='verifyCode' src="{{ url_for('user.verifyCode')}}"></label>
+            <label class="control-label"><img id='verifyCode' src="{{ url_for('user.verifyCode') }}"></label>
             <fresh id='freshCode'>看不清？点击刷新</fresh>
             {{ form.verify_code(class="form-control form_style") }}
         </div>
@@ -38,5 +46,6 @@
         </div>
         {{ form.submit(class="btn btn-info submit") }}
     </form>
+    {#    {{ wtf.quick_form(form) }}#}
 
 {% endblock %}

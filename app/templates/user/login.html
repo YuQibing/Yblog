@@ -13,10 +13,14 @@
             {{ form.username.label(class="control-label") }}
             {{ form.username(class="form-control form_style") }}
         </div>
+        {% if form.username.errors %}{% for error in form.username.errors %}<span class="help-block">{{ error }}</span>
+        {% endfor %}{% endif %}
         <div class="form-group required">
             {{ form.password.label(class="control-label") }}
             {{ form.password(class="form-control form_style") }}
         </div>
+        {% if form.password.errors %}{% for error in form.password.errors %}<span class="help-block">{{ error }}</span>
+        {% endfor %}{% endif %}
         <div class="form-group required">
             {{ form.verifyCode.label(class="control-label") }}
              <label class="control-label"><img id='verifyCode' src="{{ url_for('user.verifyCode')}}"></label>
