@@ -1,5 +1,10 @@
 {% extends 'bootstrap/base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
+{% block styles %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+{% endblock %}
 {% block navbar %}
     <nav class="navbar navbar-inverse" style="border-radius: 0px;">
         <div class="container">
@@ -61,9 +66,7 @@
 
 # 手动添加js 提高加载速度
 {% block scripts %}
-    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    {#    {{ super() }}#}
+{#        {{ super() }}#}
     {#    导入moment.js#}
     {{ moment.include_moment() }}
     {{ moment.locale('zh-CN') }}

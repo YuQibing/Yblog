@@ -12,13 +12,13 @@
         {{ form.hidden_tag() }}
         <div class="form-group required">
             {{ form.username.label(class="control-label") }}
-            {{ form.username(class="form-control form_style") }}
+            {{ form.username(class="form-control form_style", placeholder='请输入6到10位字符的用户名') }}
         </div>
         {% if form.username.errors %}{% for error in form.username.errors %}<span class="help-block">{{ error }}</span>
         {% endfor %}{% endif %}
         <div class="form-group required">
             {{ form.password.label(class="control-label") }}
-            {{ form.password(class="form-control form_style") }}
+            {{ form.password(class="form-control form_style", placeholder='请输入6到10位字符的密码') }}
         </div>
         {% if form.password.errors %}{% for error in form.password.errors %}<span class="help-block">{{ error }}</span>
         {% endfor %}{% endif %}
@@ -30,7 +30,7 @@
         {% endfor %}{% endif %}
         <div class="form-group required">
             {{ form.email.label(class="control-label") }}
-            {{ form.email(class="form-control form_style") }}
+            {{ form.email(class="form-control form_style", placeholder='请输入正确的邮箱格式') }}
         </div>
         {% if form.email.errors %}{% for error in form.email.errors %}<span class="help-block">{{ error }}</span>
         {% endfor %}{% endif %}
