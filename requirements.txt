@@ -62,7 +62,7 @@ jupyter-client==5.1.0
 jupyter-console==5.2.0
 jupyter-core==4.4.0
 lenses==0.1.7
-lxml==4.1.1
+lxml==4.6.5
 Mail==2.1.0
 Mako==1.0.7
 Markdown==2.6.9
