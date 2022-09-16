@@ -64,7 +64,7 @@ jupyter-core==4.4.0
 lenses==0.1.7
 lxml==4.1.1
 Mail==2.1.0
-Mako==1.0.7
+Mako==1.2.2
 Markdown==2.6.9
 MarkupSafe==1.0
 matplotlib==2.1.0
