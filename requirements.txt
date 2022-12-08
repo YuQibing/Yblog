@@ -10,7 +10,7 @@ BareNecessities==0.2.8
 beautifulsoup4==4.6.0
 bleach==2.1.1
 blinker==1.4
-certifi==2017.7.27.1
+certifi==2022.12.7
 cffi==1.11.2
 cfscrape==1.9.0
 chardet==3.0.4
